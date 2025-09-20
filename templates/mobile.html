@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>数字消消乐 - 手机端</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mobile.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>数字消消乐</h1>
+            <div class="score-board">
+                <div class="score-container">
+                    <div class="score-label">分数</div>
+                    <div class="score" id="score">0</div>
+                </div>
+                <div class="score-container">
+                    <div class="score-label">移动</div>
+                    <div class="score" id="moves">0</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="grid-size">网格:</label>
+                <select id="grid-size">
+                    {% for size in range(config.game.min_size, config.game.mobile_max_size + 1) %}
+                    <option value="{{ size }}" {% if size == 4 %}selected{% endif %}>{{ size }}×{{ size }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button id="new-game-btn" class="btn">新游戏</button>
+            <button id="toggle-controls" class="btn">显示按键</button>
+        </div>
+
+        <div class="game-container">
+            <div class="grid-container" id="grid-container">
+                <!-- 游戏网格将通过JavaScript动态生成 -->
+            </div>
+        </div>
+
+        <!-- 虚拟方向键 (默认折叠) -->
+        <div id="virtual-controls" class="virtual-controls" style="display: none;">
+            <div class="control-row">
+                <button class="control-btn" id="up-btn">↑</button>
+            </div>
+            <div class="control-row">
+                <button class="control-btn" id="left-btn">←</button>
+                <button class="control-btn" id="down-btn">↓</button>
+                <button class="control-btn" id="right-btn">→</button>
+            </div>
+        </div>
+
+        <div id="game-over" class="game-message" style="display: none;">
+            <div class="game-message-text">
+                <h2>游戏结束!</h2>
+                <p>最终分数: <span id="final-score">0</span></p>
+                <button class="btn" onclick="newGame()">再试一次</button>
+            </div>
+        </div>
+
+        <div id="game-won" class="game-message" style="display: none;">
+            <div class="game-message-text">
+                <h2>恭喜!</h2>
+                <p>你达到了2048！</p>
+                <button class="btn" onclick="continueGame()">继续游戏</button>
+                <button class="btn" onclick="newGame()">新游戏</button>
+            </div>
+        </div>
+
+        <!-- 滑动操作提示 -->
+        <div class="swipe-instructions">
+            <p>滑动屏幕控制移动方向</p>
+            <p>或点击"显示按键"使用虚拟方向键</p>
+        </div>
+
+        <!-- 排行榜 -->
+        <div id="leaderboard" class="leaderboard">
+            <h3>排行榜</h3>
+            <div id="leaderboard-list">
+                <!-- 排行榜将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/mobile.js') }}"></script>
+</body>
+</html>

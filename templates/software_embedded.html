@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SW数字游戏 - 软件内嵌版</title>
+    <link rel="stylesheet" href="static/css/desktop.css">
+    <style>
+        .header-bar {
+            background: linear-gradient(135deg, #FF6B35, #FF8E53);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .header-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .header-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-1px);
+        }
+        
+        .server-status {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-left: 20px;
+        }
+        
+        .game-content {
+            padding-top: 60px; /* 为header-bar留出空间 */
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background: #faf8ef;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-bar">
+        <div class="header-title">SW数字游戏</div>
+        <div style="display: flex; align-items: center;">
+            <div class="header-buttons">
+                <button class="header-btn" onclick="showUpdates()">查看更新</button>
+                <button class="header-btn" onclick="showWelcome()">查看介绍</button>
+            </div>
+            <div class="server-status" id="server-status">局域网: 已启动</div>
+        </div>
+    </div>
+
+    <div class="game-content">
+        <div class="container">
+            <header>
+                <h1>数字消消乐</h1>
+                <div class="score-board">
+                    <div class="score-container">
+                        <div class="score-label">分数</div>
+                        <div class="score" id="score">0</div>
+                    </div>
+                    <div class="score-container">
+                        <div class="score-label">最高分</div>
+                        <div class="score" id="high-score">0</div>
+                    </div>
+                    <div class="score-container">
+                        <div class="score-label">移动</div>
+                        <div class="score" id="moves">0</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="grid-size">网格大小:</label>
+                    <select id="grid-size">
+                        <option value="3">3×3</option>
+                        <option value="4" selected>4×4</option>
+                        <option value="5">5×5</option>
+                        <option value="6">6×6</option>
+                    </select>
+                </div>
+                <button id="new-game-btn" class="btn">新游戏</button>
+            </div>
+
+            <div class="game-container">
+                <div class="grid-container" id="grid-container">
+                    <!-- 游戏网格将通过JavaScript动态生成 -->
+                </div>
+            </div>
+
+            <div class="instructions">
+                <p>使用方向键 ↑ ↓ ← → 控制移动</p>
+                <p>合并相同的数字方块！</p>
+            </div>
+
+            <div id="game-over" class="game-message" style="display: none;">
+                <div class="game-message-text">
+                    <h2>游戏结束!</h2>
+                    <p>最终分数: <span id="final-score">0</span></p>
+                    <button class="btn" onclick="newGame()">再试一次</button>
+                </div>
+            </div>
+
+            <div id="game-won" class="game-message" style="display: none;">
+                <div class="game-message-text">
+                    <h2>恭喜!</h2>
+                    <p>你达到了2048！</p>
+                    <button class="btn" onclick="continueGame()">继续游戏</button>
+                    <button class="btn" onclick="newGame()">新游戏</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/js/desktop_local.js"></script>
+    <script>
+        // 本地文件访问函数
+        function showUpdates() {
+            window.open('updates.html', '_blank', 'width=800,height=600,scrollbars=yes');
+        }
+        
+        function showWelcome() {
+            window.open('welcome.html', '_blank', 'width=800,height=600,scrollbars=yes');
+        }
+        
+        // 更新服务器状态
+        function updateServerStatus(status) {
+            const statusEl = document.getElementById('server-status');
+            statusEl.textContent = `局域网: ${status}`;
+        }
+        
+        // 监听服务器状态变化（如果有）
+        window.addEventListener('message', function(e) {
+            if (e.data.type === 'server-status') {
+                updateServerStatus(e.data.status);
+            }
+        });
+    </script>
+</body>
+</html>

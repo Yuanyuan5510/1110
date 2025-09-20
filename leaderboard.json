@@ -1,0 +1,56 @@
+[
+  {
+    "score": 64,
+    "max_tile": 32,
+    "moves": 27,
+    "size": 4,
+    "player_name": "玩家_9478ff44",
+    "timestamp": "2025-09-12T23:15:52.436612",
+    "date": "2025-09-12 23:15"
+  },
+  {
+    "score": 34,
+    "max_tile": 8,
+    "moves": 15,
+    "size": 4,
+    "player_name": "玩家_6a114a96",
+    "timestamp": "2025-09-12T23:27:58.401361",
+    "date": "2025-09-12 23:27"
+  },
+  {
+    "score": 30,
+    "max_tile": 8,
+    "moves": 12,
+    "size": 4,
+    "player_name": "玩家_a633d68a",
+    "timestamp": "2025-09-12T22:49:52.154642",
+    "date": "2025-09-12 22:49"
+  },
+  {
+    "score": 20,
+    "max_tile": 8,
+    "moves": 8,
+    "size": 4,
+    "player_name": "玩家_a5548239",
+    "timestamp": "2025-09-12T23:07:57.444425",
+    "date": "2025-09-12 23:07"
+  },
+  {
+    "score": 14,
+    "max_tile": 8,
+    "moves": 4,
+    "size": 4,
+    "player_name": "玩家_5186ceb3",
+    "timestamp": "2025-09-13T00:52:30.998962",
+    "date": "2025-09-13 00:52"
+  },
+  {
+    "score": 8,
+    "max_tile": 4,
+    "moves": 1,
+    "size": 4,
+    "player_name": "玩家_2249899d",
+    "timestamp": "2025-09-13T01:04:39.599570",
+    "date": "2025-09-13 01:04"
+  }
+]

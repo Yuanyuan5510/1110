@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字消消乐 - 电脑端</title>
+    <link rel="stylesheet" href="../static/css/desktop.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>数字消消乐</h1>
+            <div class="score-board">
+                <div class="score-container">
+                    <div class="score-label">分数</div>
+                    <div class="score" id="score">0</div>
+                </div>
+                <div class="score-container">
+                    <div class="score-label">最高分</div>
+                    <div class="score" id="high-score">0</div>
+                </div>
+                <div class="score-container">
+                    <div class="score-label">移动</div>
+                    <div class="score" id="moves">0</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="grid-size">网格大小:</label>
+                <select id="grid-size">
+                    <option value="3">3×3</option>
+                    <option value="4" selected>4×4</option>
+                    <option value="5">5×5</option>
+                    <option value="6">6×6</option>
+                </select>
+            </div>
+            <button id="new-game-btn" class="btn">新游戏</button>
+        </div>
+
+        <div class="game-container">
+            <div class="grid-container" id="grid-container">
+                <!-- 游戏网格将通过JavaScript动态生成 -->
+            </div>
+        </div>
+
+        <div class="instructions">
+            <p>使用方向键 ↑ ↓ ← → 控制移动</p>
+            <p>合并相同的数字方块！</p>
+        </div>
+
+        <div id="game-over" class="game-message" style="display: none;">
+            <div class="game-message-text">
+                <h2>游戏结束!</h2>
+                <p>最终分数: <span id="final-score">0</span></p>
+                <button class="btn" onclick="newGame()">再试一次</button>
+            </div>
+        </div>
+
+        <div id="game-won" class="game-message" style="display: none;">
+            <div class="game-message-text">
+                <h2>恭喜!</h2>
+                <p>你达到了2048！</p>
+                <button class="btn" onclick="continueGame()">继续游戏</button>
+                <button class="btn" onclick="newGame()">新游戏</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/js/desktop_local.js"></script>
+</body>
+</html>
